@@ -8,17 +8,19 @@
 #include "SD.h"
 #include "SPI.h"
 
-// Global variables
-const byte button = 4;
-const byte led = 16;
+// Pins
+#define RCPin 26
+#define led 2
 
+// Global variables
 Adafruit_MPU6050 mpu;
-volatile byte writing = LOW;  // Writing on file
+volatile byte writing = HIGH;  // Writing on file
 String formatedData;
 
-const char* fileName = "/teste.csv";
+const char* fileName = "/teste_bateria.csv";
 
 
+// SD Functions
 void writeFile(fs::FS &fs, const char * path, const char * message){
     Serial.printf("Writing file: %s\n", path);
 
@@ -59,21 +61,18 @@ void setup(void) {
   // Initialize Micro SD Shield
   if(!SD.begin()){
     Serial.println("Card Mount Failed");
-    return;
+    //return;
   }
     
   uint8_t cardType = SD.cardType();
   if(cardType == CARD_NONE){
     Serial.println("No SD card attached");
-    return;
+    //return;
   }
     
   // Initialize MPU6050
   if (!mpu.begin()) {
     Serial.println("Failed to find MPU6050 chip");
-    while (1) {
-      delay(10);
-    }
   }
 
   // MPU range and bandwidth config
@@ -82,35 +81,32 @@ void setup(void) {
   mpu.setFilterBandwidth(MPU6050_BAND_21_HZ);
 
   // Interruption
-  pinMode(button, INPUT);
+  pinMode(RCPin, INPUT);
   pinMode(led, OUTPUT);
-  attachInterrupt(digitalPinToInterrupt(button), toggleWriting, FALLING);
 
-  // Header of datalogger
+  // Datalogger's Header
   writeFile(SD, fileName, "Time,Acel. X,Acel. Y,Acel. Z,Rot. X,Rot. Y,Rot. Z");
 }
 
 
 void loop() {
   // Get new sensor events with the readings
-  if (writing) {
+  byte switchValue = pulseIn(RCPin, HIGH);
+  
+  if (switchValue < 220) {
+    digitalWrite(led, HIGH);
     sensors_event_t a, g, t;
     mpu.getEvent(&a, &g, &t);
   
     formatedData = String(millis()) + "," + String(a.acceleration.x) + "," + String(a.acceleration.y) + "," + String(a.acceleration.z)
-                   + String(g.gyro.x) + "," + String(g.gyro.y) + "," + String(g.gyro.z);
+                   + "," + String(g.gyro.x) + "," + String(g.gyro.y) + "," + String(g.gyro.z);
                    
     Serial.println(formatedData);
     Serial.println();
     
     appendFile(SD, fileName, formatedData.c_str());
+  } else {
+    digitalWrite(led, LOW);
+    Serial.println("Aguardando...");  
   }
-
-  digitalWrite(led, writing);
-  delay(100);
-}
-
-
-void toggleWriting() {
-  writing = !writing;
 }

@@ -104,24 +104,158 @@
       <circ-port height="8" pin="180,760" width="8" x="86" y="246"/>
       <circ-anchor facing="west" height="6" width="6" x="47" y="57"/>
     </appear>
-    <comp lib="0" loc="(30,70)" name="Pin">
+    <comp lib="0" loc="(30,190)" name="Pin">
       <a name="facing" val="west"/>
       <a name="tristate" val="false"/>
-      <a name="label" val="EN"/>
+      <a name="label" val="SN"/>
+    </comp>
+    <comp lib="0" loc="(30,390)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="G26"/>
+    </comp>
+    <comp lib="0" loc="(30,510)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="G12"/>
+    </comp>
+    <comp lib="0" loc="(330,30)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="GND"/>
+    </comp>
+    <comp lib="0" loc="(330,670)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="SD1"/>
+    </comp>
+    <comp lib="0" loc="(330,390)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="G5"/>
+    </comp>
+    <comp lib="0" loc="(30,670)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="SD3"/>
+    </comp>
+    <comp lib="0" loc="(30,630)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="SD2"/>
+    </comp>
+    <comp lib="0" loc="(330,270)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="GND"/>
     </comp>
     <comp lib="0" loc="(330,230)" name="Pin">
       <a name="tristate" val="false"/>
       <a name="label" val="G21"/>
+    </comp>
+    <comp lib="0" loc="(30,310)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="G33"/>
+    </comp>
+    <comp lib="0" loc="(330,470)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="G16"/>
+    </comp>
+    <comp lib="0" loc="(330,310)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="G19"/>
+    </comp>
+    <comp lib="0" loc="(30,710)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="CMD"/>
+    </comp>
+    <comp lib="0" loc="(330,150)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="TXD"/>
+    </comp>
+    <comp lib="0" loc="(30,110)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="SP"/>
+    </comp>
+    <comp lib="0" loc="(330,110)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="G22"/>
+    </comp>
+    <comp lib="0" loc="(30,270)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="G32"/>
+    </comp>
+    <comp lib="0" loc="(330,710)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="SD0"/>
+    </comp>
+    <comp lib="0" loc="(330,70)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="G23"/>
+    </comp>
+    <comp lib="0" loc="(330,590)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="G2"/>
     </comp>
     <comp lib="0" loc="(30,30)" name="Pin">
       <a name="facing" val="west"/>
       <a name="tristate" val="false"/>
       <a name="label" val="3v3"/>
     </comp>
-    <comp lib="0" loc="(30,510)" name="Pin">
+    <comp lib="0" loc="(330,190)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="RXD"/>
+    </comp>
+    <comp lib="0" loc="(330,550)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="G0"/>
+    </comp>
+    <comp lib="0" loc="(330,430)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="G17"/>
+    </comp>
+    <comp lib="0" loc="(30,70)" name="Pin">
       <a name="facing" val="west"/>
       <a name="tristate" val="false"/>
-      <a name="label" val="G12"/>
+      <a name="label" val="EN"/>
+    </comp>
+    <comp lib="0" loc="(30,230)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="G35"/>
+    </comp>
+    <comp lib="0" loc="(30,590)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="G13"/>
+    </comp>
+    <comp lib="0" loc="(180,760)" name="Pin">
+      <a name="facing" val="south"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="MICRO-USB"/>
+    </comp>
+    <comp lib="0" loc="(30,470)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="G14"/>
+    </comp>
+    <comp lib="0" loc="(330,510)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="G4"/>
+    </comp>
+    <comp lib="0" loc="(30,150)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="G34"/>
+    </comp>
+    <comp lib="0" loc="(30,550)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="GND"/>
+    </comp>
+    <comp lib="0" loc="(330,750)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="CLK"/>
     </comp>
     <comp lib="0" loc="(30,750)" name="Pin">
       <a name="facing" val="west"/>
@@ -133,152 +267,18 @@
       <a name="tristate" val="false"/>
       <a name="label" val="G25"/>
     </comp>
-    <comp lib="0" loc="(30,110)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="SP"/>
-    </comp>
-    <comp lib="0" loc="(30,150)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="G34"/>
-    </comp>
-    <comp lib="0" loc="(30,190)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="SN"/>
-    </comp>
-    <comp lib="0" loc="(330,30)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="GND"/>
-    </comp>
-    <comp lib="0" loc="(330,430)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="G17"/>
-    </comp>
-    <comp lib="0" loc="(330,670)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="SD1"/>
-    </comp>
-    <comp lib="0" loc="(330,510)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="G4"/>
-    </comp>
-    <comp lib="0" loc="(330,590)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="G2"/>
-    </comp>
-    <comp lib="0" loc="(330,470)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="G16"/>
-    </comp>
-    <comp lib="0" loc="(330,750)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="CLK"/>
-    </comp>
-    <comp lib="0" loc="(330,110)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="G22"/>
-    </comp>
     <comp lib="0" loc="(330,630)" name="Pin">
       <a name="tristate" val="false"/>
       <a name="label" val="G15"/>
-    </comp>
-    <comp lib="0" loc="(30,670)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="SD3"/>
-    </comp>
-    <comp lib="0" loc="(330,150)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="TXD"/>
-    </comp>
-    <comp lib="0" loc="(30,270)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="G32"/>
-    </comp>
-    <comp lib="0" loc="(330,710)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="SD0"/>
-    </comp>
-    <comp lib="0" loc="(30,230)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="G35"/>
-    </comp>
-    <comp lib="0" loc="(330,350)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="G18"/>
-    </comp>
-    <comp lib="0" loc="(330,70)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="G23"/>
-    </comp>
-    <comp lib="0" loc="(30,550)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="GND"/>
-    </comp>
-    <comp lib="0" loc="(330,310)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="G19"/>
-    </comp>
-    <comp lib="0" loc="(180,760)" name="Pin">
-      <a name="facing" val="south"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="MICRO-USB"/>
-    </comp>
-    <comp lib="0" loc="(30,630)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="SD2"/>
-    </comp>
-    <comp lib="0" loc="(330,390)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="G5"/>
     </comp>
     <comp lib="0" loc="(30,430)" name="Pin">
       <a name="facing" val="west"/>
       <a name="tristate" val="false"/>
       <a name="label" val="G27"/>
     </comp>
-    <comp lib="0" loc="(30,710)" name="Pin">
-      <a name="facing" val="west"/>
+    <comp lib="0" loc="(330,350)" name="Pin">
       <a name="tristate" val="false"/>
-      <a name="label" val="CMD"/>
-    </comp>
-    <comp lib="0" loc="(330,190)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="RXD"/>
-    </comp>
-    <comp lib="0" loc="(30,390)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="G26"/>
-    </comp>
-    <comp lib="0" loc="(330,550)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="G0"/>
-    </comp>
-    <comp lib="0" loc="(30,590)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="G13"/>
-    </comp>
-    <comp lib="0" loc="(30,470)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="G14"/>
-    </comp>
-    <comp lib="0" loc="(30,310)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="G33"/>
-    </comp>
-    <comp lib="0" loc="(330,270)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="GND"/>
+      <a name="label" val="G18"/>
     </comp>
   </circuit>
   <circuit name="main">
@@ -286,15 +286,12 @@
     <a name="clabel" val=""/>
     <a name="clabelup" val="east"/>
     <a name="clabelfont" val="SansSerif plain 12"/>
-    <wire from="(270,240)" to="(270,380)"/>
     <wire from="(350,200)" to="(350,340)"/>
     <wire from="(330,220)" to="(330,360)"/>
     <wire from="(390,140)" to="(440,140)"/>
     <wire from="(390,130)" to="(440,130)"/>
-    <wire from="(220,210)" to="(340,210)"/>
-    <wire from="(220,240)" to="(270,240)"/>
+    <wire from="(220,190)" to="(270,190)"/>
     <wire from="(390,140)" to="(390,150)"/>
-    <wire from="(220,220)" to="(330,220)"/>
     <wire from="(220,150)" to="(390,150)"/>
     <wire from="(320,140)" to="(320,350)"/>
     <wire from="(320,350)" to="(430,350)"/>
@@ -303,19 +300,26 @@
     <wire from="(420,370)" to="(420,400)"/>
     <wire from="(330,360)" to="(430,360)"/>
     <wire from="(220,140)" to="(320,140)"/>
+    <wire from="(230,220)" to="(330,220)"/>
+    <wire from="(240,210)" to="(340,210)"/>
     <wire from="(340,330)" to="(430,330)"/>
-    <wire from="(240,250)" to="(240,420)"/>
     <wire from="(120,130)" to="(140,130)"/>
     <wire from="(220,180)" to="(430,180)"/>
     <wire from="(390,90)" to="(390,130)"/>
     <wire from="(220,130)" to="(240,130)"/>
     <wire from="(500,360)" to="(500,400)"/>
-    <wire from="(220,250)" to="(240,250)"/>
+    <wire from="(220,160)" to="(240,160)"/>
+    <wire from="(220,240)" to="(240,240)"/>
     <wire from="(420,370)" to="(430,370)"/>
     <wire from="(430,120)" to="(440,120)"/>
     <wire from="(430,150)" to="(440,150)"/>
     <wire from="(490,360)" to="(500,360)"/>
+    <wire from="(230,170)" to="(230,220)"/>
+    <wire from="(240,160)" to="(240,210)"/>
     <wire from="(350,340)" to="(430,340)"/>
+    <wire from="(220,170)" to="(230,170)"/>
+    <wire from="(240,240)" to="(240,420)"/>
+    <wire from="(270,190)" to="(270,380)"/>
     <wire from="(120,70)" to="(120,130)"/>
     <wire from="(340,210)" to="(340,330)"/>
     <wire from="(220,200)" to="(350,200)"/>
@@ -323,16 +327,6 @@
     <comp lib="0" loc="(420,400)" name="Tunnel">
       <a name="facing" val="north"/>
       <a name="label" val="3V3"/>
-    </comp>
-    <comp loc="(430,300)" name="Micro SD Shield"/>
-    <comp lib="0" loc="(240,70)" name="Tunnel">
-      <a name="facing" val="south"/>
-      <a name="label" val="GND"/>
-    </comp>
-    <comp loc="(440,120)" name="MPU6050"/>
-    <comp loc="(140,130)" name="Wroom32"/>
-    <comp lib="0" loc="(180,320)" name="Power">
-      <a name="facing" val="south"/>
     </comp>
     <comp lib="0" loc="(430,90)" name="Tunnel">
       <a name="facing" val="south"/>
@@ -342,15 +336,23 @@
       <a name="facing" val="north"/>
       <a name="label" val="GND"/>
     </comp>
-    <comp lib="5" loc="(240,420)" name="Button">
-      <a name="facing" val="north"/>
-      <a name="label" val="Toggle Writing"/>
-      <a name="labelloc" val="south"/>
-    </comp>
     <comp lib="5" loc="(270,380)" name="LED">
       <a name="facing" val="north"/>
       <a name="label" val="LED"/>
       <a name="labelloc" val="south"/>
+    </comp>
+    <comp loc="(440,120)" name="MPU6050">
+      <a name="facing" val="west"/>
+    </comp>
+    <comp loc="(140,130)" name="Wroom32">
+      <a name="facing" val="west"/>
+    </comp>
+    <comp lib="0" loc="(180,320)" name="Power">
+      <a name="facing" val="south"/>
+    </comp>
+    <comp lib="0" loc="(240,70)" name="Tunnel">
+      <a name="facing" val="south"/>
+      <a name="label" val="GND"/>
     </comp>
     <comp lib="0" loc="(390,90)" name="Tunnel">
       <a name="facing" val="south"/>
@@ -359,6 +361,14 @@
     <comp lib="0" loc="(120,70)" name="Tunnel">
       <a name="facing" val="south"/>
       <a name="label" val="3V3"/>
+    </comp>
+    <comp loc="(430,300)" name="Micro SD Shield">
+      <a name="facing" val="west"/>
+    </comp>
+    <comp lib="5" loc="(240,420)" name="Button">
+      <a name="facing" val="north"/>
+      <a name="label" val="Toggle Writing"/>
+      <a name="labelloc" val="south"/>
     </comp>
   </circuit>
   <circuit name="MPU6050">
@@ -392,40 +402,40 @@
       <a name="tristate" val="false"/>
       <a name="label" val="INT"/>
     </comp>
-    <comp lib="0" loc="(160,190)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="GND"/>
-    </comp>
-    <comp lib="0" loc="(160,150)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="VCC"/>
-    </comp>
     <comp lib="0" loc="(160,270)" name="Pin">
       <a name="facing" val="west"/>
       <a name="tristate" val="false"/>
       <a name="label" val="SDA"/>
     </comp>
-    <comp lib="0" loc="(160,310)" name="Pin">
+    <comp lib="0" loc="(160,350)" name="Pin">
       <a name="facing" val="west"/>
       <a name="tristate" val="false"/>
-      <a name="label" val="XDA"/>
+      <a name="label" val="XCL"/>
+    </comp>
+    <comp lib="0" loc="(160,190)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="GND"/>
     </comp>
     <comp lib="0" loc="(160,390)" name="Pin">
       <a name="facing" val="west"/>
       <a name="tristate" val="false"/>
       <a name="label" val="ADC"/>
     </comp>
+    <comp lib="0" loc="(160,150)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="VCC"/>
+    </comp>
     <comp lib="0" loc="(160,230)" name="Pin">
       <a name="facing" val="west"/>
       <a name="tristate" val="false"/>
       <a name="label" val="SCL"/>
     </comp>
-    <comp lib="0" loc="(160,350)" name="Pin">
+    <comp lib="0" loc="(160,310)" name="Pin">
       <a name="facing" val="west"/>
       <a name="tristate" val="false"/>
-      <a name="label" val="XCL"/>
+      <a name="label" val="XDA"/>
     </comp>
   </circuit>
   <circuit name="Micro SD Shield">
@@ -455,53 +465,73 @@
       <circ-port height="8" pin="250,450" width="8" x="46" y="126"/>
       <circ-anchor facing="west" height="6" width="6" x="47" y="57"/>
     </appear>
-    <comp lib="0" loc="(430,250)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="D1"/>
-      <a name="labelloc" val="east"/>
-    </comp>
     <comp lib="0" loc="(250,330)" name="Pin">
       <a name="facing" val="west"/>
       <a name="tristate" val="false"/>
       <a name="label" val="D6"/>
     </comp>
-    <comp lib="0" loc="(250,450)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="3V3"/>
+    <comp lib="6" loc="(340,273)" name="Text">
+      <a name="text" val="MICRO SD SHIELD"/>
     </comp>
     <comp lib="0" loc="(250,250)" name="Pin">
       <a name="facing" val="west"/>
       <a name="tristate" val="false"/>
       <a name="label" val="D0"/>
     </comp>
+    <comp lib="0" loc="(430,170)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="TX"/>
+      <a name="labelloc" val="east"/>
+    </comp>
     <comp lib="0" loc="(250,210)" name="Pin">
       <a name="facing" val="west"/>
       <a name="tristate" val="false"/>
       <a name="label" val="A0"/>
     </comp>
-    <comp lib="0" loc="(250,290)" name="Pin">
+    <comp lib="0" loc="(430,410)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="GND"/>
+      <a name="labelloc" val="east"/>
+    </comp>
+    <comp lib="0" loc="(430,290)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="D2"/>
+      <a name="labelloc" val="east"/>
+    </comp>
+    <comp lib="0" loc="(250,410)" name="Pin">
       <a name="facing" val="west"/>
       <a name="tristate" val="false"/>
-      <a name="label" val="D5"/>
+      <a name="label" val="D8"/>
     </comp>
-    <comp lib="0" loc="(430,210)" name="Pin">
+    <comp lib="0" loc="(250,450)" name="Pin">
+      <a name="facing" val="west"/>
       <a name="tristate" val="false"/>
-      <a name="label" val="RX"/>
-      <a name="labelloc" val="east"/>
+      <a name="label" val="3V3"/>
     </comp>
     <comp lib="0" loc="(430,370)" name="Pin">
       <a name="tristate" val="false"/>
       <a name="label" val="D4"/>
       <a name="labelloc" val="east"/>
     </comp>
-    <comp lib="0" loc="(430,450)" name="Pin">
+    <comp lib="0" loc="(430,210)" name="Pin">
       <a name="tristate" val="false"/>
-      <a name="label" val="5V"/>
+      <a name="label" val="RX"/>
       <a name="labelloc" val="east"/>
     </comp>
-    <comp lib="6" loc="(340,273)" name="Text">
-      <a name="text" val="MICRO SD SHIELD"/>
+    <comp lib="0" loc="(430,250)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="D1"/>
+      <a name="labelloc" val="east"/>
+    </comp>
+    <comp lib="0" loc="(250,290)" name="Pin">
+      <a name="facing" val="west"/>
+      <a name="tristate" val="false"/>
+      <a name="label" val="D5"/>
+    </comp>
+    <comp lib="0" loc="(430,330)" name="Pin">
+      <a name="tristate" val="false"/>
+      <a name="label" val="D3"/>
+      <a name="labelloc" val="east"/>
     </comp>
     <comp lib="0" loc="(250,170)" name="Pin">
       <a name="facing" val="west"/>
@@ -513,29 +543,9 @@
       <a name="tristate" val="false"/>
       <a name="label" val="D7"/>
     </comp>
-    <comp lib="0" loc="(430,290)" name="Pin">
+    <comp lib="0" loc="(430,450)" name="Pin">
       <a name="tristate" val="false"/>
-      <a name="label" val="D2"/>
-      <a name="labelloc" val="east"/>
-    </comp>
-    <comp lib="0" loc="(430,170)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="TX"/>
-      <a name="labelloc" val="east"/>
-    </comp>
-    <comp lib="0" loc="(250,410)" name="Pin">
-      <a name="facing" val="west"/>
-      <a name="tristate" val="false"/>
-      <a name="label" val="D8"/>
-    </comp>
-    <comp lib="0" loc="(430,330)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="D3"/>
-      <a name="labelloc" val="east"/>
-    </comp>
-    <comp lib="0" loc="(430,410)" name="Pin">
-      <a name="tristate" val="false"/>
-      <a name="label" val="GND"/>
+      <a name="label" val="5V"/>
       <a name="labelloc" val="east"/>
     </comp>
   </circuit>
