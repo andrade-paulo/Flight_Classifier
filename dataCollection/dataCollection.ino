@@ -15,6 +15,7 @@
 // Global variables
 Adafruit_MPU6050 MPU;
 byte Writing = HIGH;  // Writing on file
+byte Cabecalho = LOW;
 String FormatedData;
 sensors_event_t a, g, t;
 const char* fileName = "/teste_bateria.csv";
@@ -23,11 +24,11 @@ const char* fileName = "/teste_bateria.csv";
 volatile long StartTime = 0;
 volatile long CurrentTime = 0;
 volatile long Pulses = 0;
-int PulseWidth = 0;
+short PulseWidth = 0;
 
 // SD Functions
 void writeFile(fs::FS &fs, const char * path, const char * message){
-    Serial.printf("Writing file: %s\n", path);
+    //Serial.printf("Writing file: %s\n", path);
 
     File file = fs.open(path, FILE_WRITE);
     if(!file){
@@ -35,7 +36,7 @@ void writeFile(fs::FS &fs, const char * path, const char * message){
         return;
     }
     if(file.println(message)){
-        Serial.println("File written");
+        //Serial.println("File written");
     } else {
         Serial.println("Write failed");
     }
@@ -44,7 +45,7 @@ void writeFile(fs::FS &fs, const char * path, const char * message){
 
 
 void appendFile(fs::FS &fs, const char * path, const char * message){
-    Serial.printf("Appending to file: %s\n", path);
+    //Serial.printf("Appending to file: %s\n", path);
 
     File file = fs.open(path, FILE_APPEND);
     if(!file){
@@ -52,7 +53,7 @@ void appendFile(fs::FS &fs, const char * path, const char * message){
         return;
     }
     if(file.println(message)){
-        Serial.println("Message appended");
+        //Serial.println("Message appended");
     } else {
         Serial.println("Append failed");
     }
@@ -84,7 +85,7 @@ void setup(void) {
   }
 
   // MPU range and bandwidth config
-  MPU.setAccelerometerRange(MPU6050_RANGE_4_G);
+  MPU.setAccelerometerRange(MPU6050_RANGE_8_G);
   MPU.setGyroRange(MPU6050_RANGE_500_DEG);
   MPU.setFilterBandwidth(MPU6050_BAND_21_HZ);
 
@@ -105,22 +106,30 @@ void loop() {
   if (Pulses < 2000) {
     PulseWidth = Pulses;  
   }
-  Serial.println(PulseWidth);
+  //Serial.println(PulseWidth);
   
   if (PulseWidth > 1100) {
     digitalWrite(led, HIGH);
+    Cabecalho = HIGH;
+    
     MPU.getEvent(&a, &g, &t);
   
     FormatedData = String(millis()) + "," + String(a.acceleration.x) + "," + String(a.acceleration.y) + "," + String(a.acceleration.z)
                    + "," + String(g.gyro.x) + "," + String(g.gyro.y) + "," + String(g.gyro.z);
                    
-    Serial.println(FormatedData);
-    Serial.println();
+    //Serial.println(FormatedData);
+    //Serial.println();
     
     appendFile(SD, fileName, FormatedData.c_str());
   } else {
     digitalWrite(led, LOW);
-    Serial.println("Aguardando...");  
+
+    if (Cabecalho) {
+      appendFile(SD, fileName, "Time,Acel. X,Acel. Y,Acel. Z,Rot. X,Rot. Y,Rot. Z");
+      Cabecalho = LOW;
+      Serial.println(Cabecalho);   
+    }
+    
   }
 }
 
