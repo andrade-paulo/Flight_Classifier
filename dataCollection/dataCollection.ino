@@ -8,17 +8,17 @@
 #include "SD.h"
 #include "SPI.h"
 
-// Pins
+// Pins and consts
 #define RCPin 26
 #define led 2
+const char* FileName = "/flight.csv";
 
 // Global variables
 Adafruit_MPU6050 MPU;
-byte Writing = HIGH;  // Writing on file
 byte Cabecalho = LOW;
 String FormatedData;
 sensors_event_t a, g, t;
-const char* fileName = "/teste_bateria.csv";
+File file;
 
 // PWM reading
 volatile long StartTime = 0;
@@ -27,10 +27,10 @@ volatile long Pulses = 0;
 short PulseWidth = 0;
 
 // SD Functions
-void writeFile(fs::FS &fs, const char * path, const char * message){
+void writeFile(fs::FS &fs, const char * message){
     //Serial.printf("Writing file: %s\n", path);
 
-    File file = fs.open(path, FILE_WRITE);
+    file = fs.open(FileName, FILE_WRITE);
     if(!file){
         Serial.println("Failed to open file for Writing");
         return;
@@ -44,10 +44,9 @@ void writeFile(fs::FS &fs, const char * path, const char * message){
 }
 
 
-void appendFile(fs::FS &fs, const char * path, const char * message){
+void appendFile(fs::FS &fs, const char * message){
     //Serial.printf("Appending to file: %s\n", path);
 
-    File file = fs.open(path, FILE_APPEND);
     if(!file){
         Serial.println("Failed to open file for appending");
         return;
@@ -57,7 +56,6 @@ void appendFile(fs::FS &fs, const char * path, const char * message){
     } else {
         Serial.println("Append failed");
     }
-    file.close();
 }
 
 
@@ -94,7 +92,7 @@ void setup(void) {
   pinMode(led, OUTPUT);
 
   // Datalogger's Header
-  writeFile(SD, fileName, "Time,Acel. X,Acel. Y,Acel. Z,Rot. X,Rot. Y,Rot. Z");
+  writeFile(SD, "Time,Acel. X,Acel. Y,Acel. Z,Rot. X,Rot. Y,Rot. Z");
 
   // Interruption of RCPin for better performance
   attachInterrupt(RCPin, PulseTimer, CHANGE);
@@ -110,7 +108,12 @@ void loop() {
   
   if (PulseWidth > 1100) {
     digitalWrite(led, HIGH);
-    Cabecalho = HIGH;
+
+    if (Cabecalho) {
+      file = SD.open(FileName, FILE_APPEND);
+      appendFile(SD, "Time,Acel. X,Acel. Y,Acel. Z,Rot. X,Rot. Y,Rot. Z");
+      Cabecalho = LOW;
+    }
     
     MPU.getEvent(&a, &g, &t);
   
@@ -120,16 +123,13 @@ void loop() {
     //Serial.println(FormatedData);
     //Serial.println();
     
-    appendFile(SD, fileName, FormatedData.c_str());
+    appendFile(SD, FormatedData.c_str());
   } else {
     digitalWrite(led, LOW);
+    file.close();
+    Cabecalho = HIGH;
 
-    if (Cabecalho) {
-      appendFile(SD, fileName, "Time,Acel. X,Acel. Y,Acel. Z,Rot. X,Rot. Y,Rot. Z");
-      Cabecalho = LOW;
-      Serial.println(Cabecalho);   
-    }
-    
+    Serial.println(Cabecalho);
   }
 }
 
