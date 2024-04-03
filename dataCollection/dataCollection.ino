@@ -11,7 +11,7 @@
 // Pins and consts
 #define RCPin 26
 #define led 2
-const char* FileName = "/flight.csv";
+#define FileName "/flight.csv"
 
 // Global variables
 Adafruit_MPU6050 MPU;
