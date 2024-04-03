@@ -6,11 +6,13 @@ class Flight_Data:
     def __init__(self, id: int):
         self.id = id
         self.df = pd.read_csv('./data/voo-{:02}-processed.csv'.format(id))
+        self.repouso_inicial: Tuple[int, int] = None
         self.taxiamento_decolagem: Tuple[int, int] = None
         self.decolagem: Tuple[int, int] = None
         self.cruzeiro: Tuple[int, int] = None
         self.pouso: Tuple[int, int] = None
         self.taxiamento_pouso: Tuple[int, int] = None
+        self.repouso_final: Tuple[int, int] = None
 
     def set_label_data(self, start, end, name):
         if 'Label' not in self.df.columns:
@@ -18,18 +20,24 @@ class Flight_Data:
         self.df.loc[(self.df['Time'] >= start) & (
             self.df['Time'] < end), 'Label'] = name
 
+    def label_repouso(self):
+        if self.repouso_inicial:
+            self.set_label_data(self.repouso_inicial[0], self.repouso_inicial[1], "Repouso")
+        if self.repouso_final:
+            self.set_label_data(self.repouso_final[0], self.repouso_final[1], "Repouso")
+
     def label_cruzeiro(self):
         if self.cruzeiro:
-            self.set_label_data(self.cruzeiro[0], self.cruzeiro[1], "Cruzeiro")
+            self.set_label_data(self.cruzeiro[0], self.cruzeiro[1], "Voo")
 
     def label_decolagem(self):
         if self.decolagem:
             self.set_label_data(
-                self.decolagem[0], self.decolagem[1], "Decolagem")
+                self.decolagem[0], self.decolagem[1], "Voo")
 
     def label_pouso(self):
         if self.pouso:
-            self.set_label_data(self.pouso[0], self.pouso[1], "Pouso")
+            self.set_label_data(self.pouso[0], self.pouso[1], "Voo")
 
     def label_taxiamento(self):
         if self.taxiamento_decolagem:
@@ -40,6 +48,7 @@ class Flight_Data:
                 self.taxiamento_pouso[0], self.taxiamento_pouso[1], "Taxiamento")
 
     def label_data(self):
+        self.label_repouso()
         self.label_taxiamento()
         self.label_decolagem()
         self.label_cruzeiro()
@@ -61,7 +70,7 @@ class Flight_Data:
             os.makedirs(f'./output/{name}')
 
         # Creating the separated data
-        labels = ['Taxiamento', 'Decolagem', 'Cruzeiro', 'Pouso']
+        labels = ['Voo', 'Repouso', 'Taxiamento', 'Decolagem', 'Cruzeiro', 'Pouso']
         for label in labels:
             if label in self.df['Label'].values:
                 df_label = self.df[self.df['Label'] == label]
