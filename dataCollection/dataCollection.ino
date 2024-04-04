@@ -26,24 +26,7 @@ volatile long CurrentTime = 0;
 volatile long Pulses = 0;
 short PulseWidth = 0;
 
-// SD Functions
-void writeFile(fs::FS &fs, const char * message){
-    //Serial.printf("Writing file: %s\n", path);
-
-    file = fs.open(FileName, FILE_WRITE);
-    if(!file){
-        Serial.println("Failed to open file for Writing");
-        return;
-    }
-    if(file.println(message)){
-        //Serial.println("File written");
-    } else {
-        Serial.println("Write failed");
-    }
-    file.close();
-}
-
-
+// SD Function
 void appendFile(fs::FS &fs, const char * message){
     //Serial.printf("Appending to file: %s\n", path);
 
@@ -92,7 +75,7 @@ void setup(void) {
   pinMode(led, OUTPUT);
 
   // Datalogger's Header
-  writeFile(SD, "Time,Acel. X,Acel. Y,Acel. Z,Rot. X,Rot. Y,Rot. Z");
+  appendFile(SD, "Time,Acel. X,Acel. Y,Acel. Z,Rot. X,Rot. Y,Rot. Z");
 
   // Interruption of RCPin for better performance
   attachInterrupt(RCPin, PulseTimer, CHANGE);
@@ -104,7 +87,7 @@ void loop() {
   if (Pulses < 2000) {
     PulseWidth = Pulses;  
   }
-  //Serial.println(PulseWidth);
+  Serial.println(PulseWidth);
   
   if (PulseWidth > 1100) {
     digitalWrite(led, HIGH);
