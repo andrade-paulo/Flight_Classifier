@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #EEE;
+        }
+        
+        header {
+            margin: 0;
+            padding: 0;
+            height: 10vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main {
+            margin: 0;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #e1e1e1;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        #label {
+            font-size: 8em;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+    </style>
+
+    <head>
+        <title>WebAero</title>
+    </head>
+
+    <body>
+        <header>
+            <h1>WebAero Classifier</h1>
+        </header>
+        <main>
+            <div>
+                <p>the current flight is </p>
+                <p><span id='label'>-</span></p>
+                <p id='description' style='align-self: flex-end;'>with <span id='value'>-</span> of probabillity</p>
+            </div>
+        </main>
+    </body>
+
+    <script>
+        var Socket;
+
+        function init() {
+            Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
+            Socket.onmessage = function(event) {
+                processCommand(event);
+            };
+        }
+
+        function processCommand(event) {
+            var obj = JSON.parse(event.data);
+            
+            if (obj.value > 0.6) {
+                document.getElementById('value').style.color = 'green';
+            } else {
+                document.getElementById('value').style.color = 'red';
+            }
+            
+            obj.label = obj.label.toUpperCase();
+            obj.value = obj.value * 100;
+            
+            document.getElementById('label').innerHTML = obj.label;
+            document.getElementById('value').innerHTML = obj.value + '%';
+         
+            console.log(obj.label);
+            console.log(obj.value);
+        }
+
+        window.onload = function(event) {
+            init();
+        }
+    </script>
+</html>
