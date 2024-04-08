@@ -55,4 +55,6 @@ if __name__ == '__main__':
     flight7.repouso_inicial = (0, 52691)
     flight7.create_csv_files()
 
-
+    flight9 = Flight_Data(9)
+    flight9.decolagem = (0, 1581)
+    flight9.create_csv_files()
