@@ -60,9 +60,10 @@ void setup(void) {
   // Initialize MPU6050
   if (!MPU.begin()) {
     Serial.println("Failed to find MPU6050 chip");
-    if (MPU.setTemperatureStandby(true)) {
-      Serial.println("Temperature sensor in standby mode");
-    }
+  }
+
+  if (MPU.setTemperatureStandby(true)) {
+    Serial.println("Temperature sensor in standby mode");
   }
 
   // MPU range and bandwidth config
@@ -84,11 +85,12 @@ void setup(void) {
 
 
 void loop() {
-  // Get new sensor events with the readings
+  // Pulses for PWM signal
   if (Pulses < 2000) {
     PulseWidth = Pulses;  
   }
-  Serial.println(PulseWidth);
+  
+  //Serial.println(PulseWidth);
   
   if (PulseWidth > 1100) {
     digitalWrite(led, HIGH);

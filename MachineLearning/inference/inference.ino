@@ -1,55 +1,119 @@
+// WiFi
+#include <WiFi.h>
+#include <WebServer.h>
+#include <WebSocketsServer.h>
+#include <ArduinoJson.h>
+
+// MPU6050
 #include <Adafruit_MPU6050.h>
 #include <Adafruit_Sensor.h>
 #include <Wire.h>
+
+// Artificial inteligence model
 #include <Flight_Classifier_inferencing.h>
 
-#define FREQUENCY_HZ        60
-#define INTERVAL_MS         (1000 / (FREQUENCY_HZ + 1))
+// Pins and consts
+#define RCPin 26
+#define led 17
 
-// objeto da classe Adafruit_MPU6050
+// Global variables
 Adafruit_MPU6050 mpu;
-
+sensors_event_t a, g, t;
 float features[EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE];
 size_t feature_ix = 0;
-
 static unsigned long last_interval_ms = 0;
 
+// PWM reading
+volatile long StartTime = 0;
+volatile long CurrentTime = 0;
+volatile long Pulses = 0;
+short PulseWidth = 0;
+
+// WiFi credentials
+const char* ssid = "EspNet";
+const char* password = "alanturing";
+
+// Webpage HTML
+String webpage = "<!DOCTYPE html><html> <head> <title>WebAero</title> </head> <body style='background-color: #EEEEEE;'> <span style='color: #003366;'> <h1>WebAero</h1> <p>Classificacao: <span id='label'>-</span></p> <p>Probabilidade: <span id='value'>-</span></p> </span> </body> <script> var Socket; function init() { Socket = new WebSocket('ws://' + window.location.hostname + ':81/'); Socket.onmessage = function(event) { processCommand(event); }; } function processCommand(event) { var obj = JSON.parse(event.data); document.getElementById('label').innerHTML = obj.label; document.getElementById('value').innerHTML = obj.value; console.log(obj.label); console.log(obj.value); } window.onload = function(event) { init(); } </script></html>";
+WebServer server(80);  // the server uses port 80
+WebSocketsServer webSocket = WebSocketsServer(81);  // the websocket uses port 81
 
 void setup() {
   Serial.begin(115200);
+  // WiFi
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {  
+    // wait until WiFi is connected
+    delay(1000);
+    Serial.print(".");
+  }
 
+  Serial.print("Connected to network with IP address: ");
+  Serial.println(WiFi.localIP());
+
+  // Server config
+  server.on("/", []() {
+    server.send(200, "text/html", webpage);
+  });
+  server.begin();
+  webSocket.begin();
+
+  // MPU6050
   if (!mpu.begin()) {
     Serial.println("Failed to find MPU6050 chip");
+  }
+
+  if (mpu.setTemperatureStandby(true)) {
+    Serial.println("Temperature sensor in standby mode");
   }
 
   mpu.setAccelerometerRange(MPU6050_RANGE_8_G);
   mpu.setGyroRange(MPU6050_RANGE_500_DEG);
   mpu.setFilterBandwidth(MPU6050_BAND_21_HZ);
 
-  Serial.println("");
-  delay(100);
+  // Interruption
+  pinMode(RCPin, INPUT);
+  pinMode(led, OUTPUT);
+  digitalWrite(led, LOW);
 
+  // Interruption of RCPin for better performance
+  attachInterrupt(RCPin, PulseTimer, CHANGE);
+
+  // Classifier info
   Serial.print("Features: ");
   Serial.println(EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE);
   Serial.print("Label count: ");
   Serial.println(EI_CLASSIFIER_LABEL_COUNT);
-
 }
 
+
 void loop() {
-  sensors_event_t a, g, temp;
+  // Server loop
+  server.handleClient();
+  webSocket.loop(); 
+  
+  if (Pulses < 3000) {
+    PulseWidth = Pulses;
+  }
 
-  if (millis() > last_interval_ms + INTERVAL_MS) {
+  //Serial.println(PulseWidth);
+
+  if (PulseWidth > 1100) {
     last_interval_ms = millis();
+    digitalWrite(led, HIGH);
 
-    mpu.getEvent(&a, &g, &temp);
+    // Data collection
+    mpu.getEvent(&a, &g, &t);
 
     features[feature_ix++] = a.acceleration.x;
     features[feature_ix++] = a.acceleration.y;
     features[feature_ix++] = a.acceleration.z;
+    features[feature_ix++] = g.gyro.x;
+    features[feature_ix++] = g.gyro.y;
+    features[feature_ix++] = g.gyro.z;
 
+    //  Features reading
     if (feature_ix == EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE) {
-      Serial.println("Running the inference...");
       signal_t signal;
       ei_impulse_result_t result;
       int err = numpy::signal_from_buffer(features, EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE, &signal);
@@ -58,23 +122,58 @@ void loop() {
         return;
       }
 
-      EI_IMPULSE_ERROR res = run_classifier(&signal, &result, true);
+      // Classifier
+      EI_IMPULSE_ERROR res = run_classifier(&signal, &result);
 
       if (res != 0) return;
 
-      ei_printf("Predictions ");
-      ei_printf("(DSP: %d ms., Classification: %d ms.)",
-                result.timing.dsp, result.timing.classification);
-      ei_printf(": \n");
+      // Predictions
+      byte predictLabel = 0;
 
-      for (size_t ix = 0; ix < EI_CLASSIFIER_LABEL_COUNT; ix++) {
-        ei_printf("    %s: %.5f\n", result.classification[ix].label, result.classification[ix].value);
+      for (int i = 1; i < EI_CLASSIFIER_LABEL_COUNT; i++) {
+        if (result.classification[i].value > result.classification[predictLabel].value) predictLabel = i;
       }
+
+      //ei_printf("Prediction: ");
+      //ei_printf("    %s: %.5f\n", result.classification[predictLabel].label, result.classification[predictLabel].value);
+
+      // Send prediction to website
+      String jsonString = "";
+      StaticJsonDocument<200> doc;
+      JsonObject object = doc.to<JsonObject>();
+      object["label"] = result.classification[predictLabel].label;
+      object["value"] = result.classification[predictLabel].value;
+      serializeJson(doc, jsonString);
+      Serial.println(jsonString);
+      webSocket.broadcastTXT(jsonString);
+
       feature_ix = 0;
     }
-
+  } else {
+    digitalWrite(led, LOW);
   }
 }
+
+
+void PulseTimer() {
+  CurrentTime = micros();
+  if (CurrentTime > StartTime) {
+    Pulses = CurrentTime - StartTime;
+    StartTime = CurrentTime;
+  }
+}
+
+
+byte max(ei_impulse_result_t result) {
+  byte bigger = 0;
+
+  for (int i = 1; i < EI_CLASSIFIER_LABEL_COUNT; i++) {
+    if (result.classification[i].value > result.classification[bigger].value) bigger = i;
+  }
+
+  return bigger;
+}
+
 
 void ei_printf(const char *format, ...) {
   static char print_buf[1024] = { 0 };
