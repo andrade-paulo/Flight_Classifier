@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WebAero</title>
+    </head>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #EEE;
+        }
+        
+        header {
+            margin: 0;
+            padding: 0;
+            height: 10vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main {
+            margin: 0;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: #e1e1e1;
+        }
+
+        h1 {
+            font-size: 2em;
+        }
+
+        #label {
+            font-size: 8em;
+        }
+
+        p {
+            font-size: 1.2em;
+        }
+    </style>
+
+    <body>
+        <header>
+            <h1>WebAero Classifier</h1>
+        </header>
+        <main>
+            <div>
+                <p>the current flight is </p>
+                <p id='label'></p>
+                <p id='description' style="align-self: flex-end;">with of <span
+                        id="value"></span> probabillity</p>
+            </div>
+        </main>
+    </body>
+
+    <script>
+        var Socket;
+
+        function init() {
+
+            label = document.getElementById('label');
+            value = document.getElementById('value');
+
+            // try {
+            //     Socket = new WebSocket('ws://' + window.location.hostname + ':81/');
+            //     Socket = new WebSocket(window.location.hostname + ':81/');
+    
+            //     Socket.onmessage = function(event) {
+            //     processCommand(event);
+            //     };
+            // } catch (e) {
+            //     console.log(e);
+            //     label.innerHTML = 'Undefined';
+            //     value.innerHTML = '0.00%';
+
+            // }
+            fetch('http://localhost:5000/')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    label.innerHTML = data.label.toUpperCase();
+                    value.innerHTML = (data.value* 100).toFixed(2) + '%';
+
+                    if (data.value > 0.6) {
+                        document.getElementById('value').style.color = 'green';
+                    } else {
+                        document.getElementById('value').style.color = 'red';
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    label.innerHTML = 'Undefined';
+                    value.innerHTML = '0.00%';
+                })
+
+
+
+        }
+
+        // function processCommand(event) {
+        //     var obj = JSON.parse(event.data);
+
+        //     obj.label = obj.label.toUpperCase();
+
+        //     // Quero que o valor seja exibido em porcentagem
+        //     obj.value = obj.value * 100;
+
+
+        //     document.getElementById('label').innerHTML = obj.label.toUpperCase();
+        //     document.getElementById('value').innerHTML = obj.value + '%';
+            
+        //     console.log(obj.label);
+        //     console.log(obj.value);
+        // }
+
+        window.onload = function(event) {
+            init();
+        }
+    </script>
+</html>
