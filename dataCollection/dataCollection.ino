@@ -10,7 +10,7 @@
 
 // Pins and consts
 #define RCPin 26
-#define led 2
+#define led 17
 #define FileName "/flight.csv"
 
 // Global variables
@@ -73,6 +73,7 @@ void setup(void) {
   // Interruption
   pinMode(RCPin, INPUT);
   pinMode(led, OUTPUT);
+  digitalWrite(led, LOW);
 
   // Datalogger's Header
   appendFile(SD, "Time,Acel. X,Acel. Y,Acel. Z,Rot. X,Rot. Y,Rot. Z");
@@ -107,6 +108,8 @@ void loop() {
     //Serial.println();
     
     appendFile(SD, FormatedData.c_str());
+
+    delay(10);
   } else {
     digitalWrite(led, LOW);
     file.close();
